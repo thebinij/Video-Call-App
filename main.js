@@ -81,6 +81,7 @@ callButton.onclick = async () => {
   const answerCandidates = collection(callDoc, "answerCandidates")
 
   joinCode.innerText = `PASS CODE: ${callDoc.id}`;
+  joinCode.hidden = false;
   answerButton.disabled = true;
   callInput.disabled = true;
 
@@ -180,4 +181,5 @@ hangupButton.onclick = async () => {
   answerButton.disabled = true;
   webcamButton.disabled = false;
   hangupButton.disabled = true;
+  joinCode.hidden = true;
 }
