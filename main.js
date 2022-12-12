@@ -39,6 +39,7 @@ const webcamButton = document.getElementById('webcamButton');
 const webcamVideo = document.getElementById('webcamVideo');
 const callButton = document.getElementById('callButton');
 const callInput = document.getElementById('callInput');
+const joinCode = document.getElementById('joinCode');
 const answerButton = document.getElementById('answerButton');
 const remoteVideo = document.getElementById('remoteVideo');
 const hangupButton = document.getElementById('hangupButton');
@@ -66,6 +67,7 @@ webcamButton.onclick = async () => {
   remoteVideo.srcObject = remoteStream;
 
   callButton.disabled = false;
+  callInput.disabled = false;
   answerButton.disabled = false;
   webcamButton.disabled = true;
   hangupButton.disabled = false;
@@ -78,7 +80,9 @@ callButton.onclick = async () => {
   const offerCandidates = collection(callDoc, "offerCandidates")
   const answerCandidates = collection(callDoc, "answerCandidates")
 
-  callInput.value = callDoc.id;
+  joinCode.innerText = `PASS CODE: ${callDoc.id}`;
+  answerButton.disabled = true;
+  callInput.disabled = true;
 
   // Get candidates for caller, save to db
   pc.onicecandidate = (event) => {
@@ -170,4 +174,10 @@ hangupButton.onclick = async () => {
   webcamVideo.srcObject = null;
   remoteVideo.srcObject = null;
   pc.close();
+
+  callButton.disabled = true;
+  callInput.disabled = true;
+  answerButton.disabled = true;
+  webcamButton.disabled = false;
+  hangupButton.disabled = true;
 }
