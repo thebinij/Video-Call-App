@@ -67,3 +67,4 @@ node_modules/
 
 
 /dist
+deploy.sh
